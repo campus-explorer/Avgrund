@@ -23,6 +23,7 @@ var Avgrund = (function(){
 
 	// Deactivate on click outside
 	function onDocumentClick( event ) {
+		// console.log(event)
 		if( event.target === cover ) {
 			deactivate();
 		}
@@ -35,14 +36,14 @@ var Avgrund = (function(){
 
 		removeClass( popup, currentState );
 		addClass( popup, 'no-transition' );
-		addClass( popup, state );
+		// addClass( popup, state );
 
 		setTimeout( function() {
 			removeClass( popup, 'no-transition' );
 			addClass( container, 'avgrund-active' );
 		}, 0 );
 
-		currentState = state;
+		// currentState = state;
 	}
 
 	function deactivate() {
@@ -58,12 +59,14 @@ var Avgrund = (function(){
 		addClass( document.documentElement, 'no-blur' );
 	}
 
-	function addClass( element, name ) {
-		element.className = element.className.replace( /\s+$/gi, '' ) + ' ' + name;
+	function addClass( element, className ) {
+		if (element && !element.className.match(className)) {
+			element.className += ' ' + className;
+		}
 	}
 
-	function removeClass( element, name ) {
-		element.className = element.className.replace( name, '' );
+	function removeClass( element, className ) {
+		element.className = element.className.replace(className, '').replace('  ', ' ');
 	}
 
 	function show(selector){
